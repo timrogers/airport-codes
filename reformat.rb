@@ -3,7 +3,9 @@ require "json"
 
 airport_data = {}
 
-CSV.foreach("airports.dat") do |row|
+data = File.read("airports.dat").gsub(/\\"/,'""')
+
+CSV.parse(data) do |row|
   airport_data[row[4]] = {
     :name => row[1],
     :city => row[2],
